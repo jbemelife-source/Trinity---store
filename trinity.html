@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Trinity Hair - Luxury wigs and hair extensions. Premium quality, nationwide delivery.">
+    <title>Trinity Hair - Luxury Wigs & Extensions</title>
+    <meta name="theme-color" content="#1a3a6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Page Loader -->
+    <div id="pageLoader" class="page-loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Getting store ready...</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Trinity Hair</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Collections</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="cart-icon" id="cartIconBtn" role="button" tabindex="0" aria-label="Shopping cart">
+                <!-- Cart icon SVG -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+                    <path d="M6 6h15l-1.4 7H8.4L6 6z" stroke="#fff" stroke-width="1.2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <circle cx="10" cy="19" r="1" fill="#fff" />
+                    <circle cx="18" cy="19" r="1" fill="#fff" />
+                </svg>
+                <!-- Cart count badge -->
+                <svg id="cartCount" class="cart-count" width="26" height="26" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cart items count">
+                    <circle cx="12" cy="12" r="11" fill="#ff9500" />
+                    <text id="cartCountText" x="12" y="15" text-anchor="middle" font-size="10" font-weight="700"
+                        fill="#fff">0</text>
+                </svg>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <h1>Luxury Hair. Premium Care.</h1>
+                <p>Experience elegance with our exclusive collection of premium wigs and extensions.</p>
+                <button class="cta-btn" id="shopNowBtn">Explore Collection</button>
+                <div class="hero-search">
+                    <input type="text" id="searchInput" placeholder="Search collections..." class="hero-search-input">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2>Our Exclusive Collections</h2>
+            <div class="search-filter">
+                <select id="sortSelect" class="sort-select">
+                    <option value="default">Sort by: Default</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name">Name: A to Z</option>
+                </select>
+                <div class="price-range">
+                    <input type="number" id="minPrice" placeholder="Min ₦" class="price-input">
+                    <span>to</span>
+                    <input type="number" id="maxPrice" placeholder="Max ₦" class="price-input">
+                </div>
+                <div class="filter-carousel-wrapper">
+                    <button class="filter-nav-btn left" aria-label="Scroll filters left">‹</button>
+                    <div class="filter-buttons" id="filterButtons">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="straight">Straight</button>
+                        <button class="filter-btn" data-filter="wave">Wave</button>
+                        <button class="filter-btn" data-filter="lace">Lace</button>
+                        <button class="filter-btn" data-filter="curly">Curly</button>
+                        <button class="filter-btn" data-filter="volume">Volume</button>
+                        <button class="filter-btn" data-filter="star">Star</button>
+                        <button class="filter-btn" data-filter="heart">Heart</button>
+                        <button class="filter-btn" data-filter="princess">Princess</button>
+                    </div>
+                    <button class="filter-nav-btn right" aria-label="Scroll filters right">›</button>
+                </div>
+            </div>
+            <div class="product-grid" id="productGrid">
+                <!-- Products loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="cart-modal" role="dialog" aria-labelledby="cartHeader">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3 id="cartHeader">Your Cart</h3>
+                <span class="close-cart" id="closeCartBtn" role="button" tabindex="0"
+                    aria-label="Close cart">&times;</span>
+            </div>
+            <div id="cartItems"></div>
+            <div class="cart-total" id="cartTotal">Total: ₦0</div>
+            <button class="checkout-btn" id="checkoutBtn">Proceed to WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="success-content">
+            <div class="success-icon">✨</div>
+            <h2>Order Confirmed!</h2>
+            <p>Your order has been received. We'll contact you via WhatsApp to confirm and arrange delivery.</p>
+            <button id="successCloseBtn" class="success-btn">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" class="welcome-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="welcome-content">
+            <div class="welcome-header">
+                <h2>Welcome to Trinity Hair</h2>
+                <span class="welcome-close" id="welcomeCloseBtn" role="button" tabindex="0"
+                    aria-label="Close welcome">&times;</span>
+            </div>
+            <div class="welcome-body">
+                <p>Discover luxury in every strand. Our premium collections are crafted for elegance and style.</p>
+                <ul>
+                    <li>Premium quality, naturally beautiful hair</li>
+                    <li>Exclusive collections from trusted sources</li>
+                    <li>Fast and secure nationwide delivery</li>
+                </ul>
+                <p>Start your journey to elegance today!</p>
+                <button id="welcomeStartBtn" class="welcome-btn">Shop Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Overlay -->
+    <div id="quickViewOverlay" class="quick-view-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="quick-view-content">
+            <button id="quickViewClose" class="quick-view-close" aria-label="Close quick view">×</button>
+            <div id="quickViewBody" class="quick-view-body"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Collections</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About Trinity</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Get in Touch</h3>
+                    <ul>
+                        <li><a href="tel:+2349160660773">+234 916 066 0773</a></li>
+                        <li><a href="mailto:hello@trinityhair.com">hello@trinityhair.com</a></li>
+                        <li>Nigeria, West Africa</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Trinity Hair Collections. Where elegance meets quality. Premium hair, beautiful life.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/2349160660773?text=Hi%20Trinity%20Hair%2C%20I%20would%20like%20to%20know%20more%20about%20your%20collections"
+        target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat with us on WhatsApp"
+        title="Chat on WhatsApp">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.995 1.498 9.875 9.875 0 003.172 19.142h.004c2.393 0 4.656-.977 6.358-2.679a9.875 9.875 0 00-4.53-16.961zm0-2.023c5.468 0 9.922 4.454 9.922 9.922S17.427 21.244 12 21.244c-2.643 0-5.143-1.065-6.995-2.916C2.044 16.143 1.121 13.142 1.121 10.24c0-5.468 4.454-9.922 9.879-9.922z" />
+        </svg>
+    </a>
+
+    <script src="web.js"></script>
+</body>
+
+</html>
